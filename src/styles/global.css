@@ -1,0 +1,92 @@
+@import "tailwindcss";
+
+/* daisyUI: ship only our own theme, no built-in ones */
+@plugin "daisyui" {
+  themes: false;
+}
+
+@plugin "daisyui/theme" {
+  name: "vgi";
+  default: true;
+  prefersdark: false;
+  color-scheme: light;
+
+  --color-base-100: #F3EFE9;   /* linen */
+  --color-base-200: #E8E2D9;   /* footer */
+  --color-base-300: #CFC7BB;   /* rules */
+  --color-base-content: #1E1C1A;
+  --color-primary: #6E2B2B;    /* oxblood: 9:1 on linen, 9.6:1 under white text */
+  --color-primary-content: #FBF9F5;
+  --color-secondary: #C9A9A0;  /* dusty rose, for use on dark only */
+  --color-secondary-content: #1E1C1A;
+  --color-accent: #6E2B2B;
+  --color-accent-content: #FBF9F5;
+  --color-neutral: #1E1C1A;
+  --color-neutral-content: #F3EFE9;
+  --color-info: #3A3F52;
+  --color-info-content: #FBF9F5;
+  --color-success: #2F3B33;
+  --color-success-content: #FBF9F5;
+  --color-warning: #7A5C3A;
+  --color-warning-content: #FBF9F5;
+  --color-error: #8A1F1F;
+  --color-error-content: #FBF9F5;
+
+  --radius-selector: 0rem;
+  --radius-field: 0rem;
+  --radius-box: 0rem;
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+  --border: 1px;
+  --depth: 0;
+  --noise: 0;
+}
+
+@theme {
+  --font-display: "Bodoni Moda", Georgia, serif;
+  --font-sans: "Jost", "Helvetica Neue", sans-serif;
+  --color-muted: #6A6258;        /* 5.2:1 on linen */
+  --color-muted-dark: #CFC7BB;   /* on #1E1C1A */
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-base-100 text-base-content font-sans font-light antialiased;
+  }
+  a:focus-visible,
+  button:focus-visible,
+  summary:focus-visible,
+  input:focus-visible,
+  textarea:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 4px;
+  }
+  .bg-neutral a:focus-visible {
+    outline-color: var(--color-secondary);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      transition-duration: 0.01ms !important;
+      animation-duration: 0.01ms !important;
+    }
+  }
+}
+
+/* small tracked uppercase used for nav, links and data labels */
+@utility caps {
+  @apply text-xs font-normal uppercase tracking-[0.24em];
+}
+@utility text-link {
+  @apply caps border-b border-current pb-1.5 hover:text-primary;
+}
+@utility container-site {
+  @apply mx-auto w-full max-w-[1360px] px-5 md:px-10;
+}

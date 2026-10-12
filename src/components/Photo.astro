@@ -1,0 +1,35 @@
+---
+import { url } from '../lib/url';
+import type { Photo as PhotoType } from '../data/projects';
+
+interface Props {
+  photo: PhotoType;
+  /** CSS aspect ratio, e.g. "4 / 5"; omit to fill the parent's height */
+  ratio?: string;
+  class?: string;
+  eager?: boolean;
+}
+
+const { photo, ratio, class: className = '', eager = false } = Astro.props;
+
+const style = ratio ? `aspect-ratio: ${ratio}` : undefined;
+---
+{photo.src ? (
+  <img
+    src={url(photo.src)}
+    alt={photo.alt}
+    loading={eager ? 'eager' : 'lazy'}
+    decoding="async"
+    class:list={['block w-full object-cover', className]}
+    style={style}
+  />
+) : (
+  <div
+    role="img"
+    aria-label={photo.alt}
+    class:list={['flex items-end p-4', className]}
+    style={`background-color: ${photo.tone ?? '#B9AC98'};${style ? ` ${style};` : ''}`}
+  >
+    <span aria-hidden="true" class="caps bg-base-100/90 px-2 py-1 text-[11px] text-base-content">[Photo{photo.caption ? ` — ${photo.caption.toLowerCase()}` : ''}]</span>
+  </div>
+)}

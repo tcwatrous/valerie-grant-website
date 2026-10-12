@@ -1,0 +1,23 @@
+---
+import Photo from './Photo.astro';
+import { url } from '../lib/url';
+import type { Project } from '../data/projects';
+
+interface Props {
+  project: Project;
+  offset?: boolean;
+  /** heading level for the title, so pages keep a correct outline */
+  level?: 'h2' | 'h3';
+}
+const { project, offset = false, level = 'h3' } = Astro.props;
+const Heading = level;
+---
+<a href={url(`/projects/${project.slug}/`)} class:list={['group flex flex-col gap-4', offset && 'md:mt-24']}>
+  <div class="overflow-hidden">
+    <Photo photo={project.cover} ratio="4 / 5" class="transition-transform duration-700 group-hover:scale-[1.02]" />
+  </div>
+  <div class="flex items-baseline justify-between gap-3">
+    <Heading class="font-display text-2xl group-hover:text-primary">{project.title}</Heading>
+    <span class="caps text-muted shrink-0">{project.region}</span>
+  </div>
+</a>

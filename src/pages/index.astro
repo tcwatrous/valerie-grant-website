@@ -1,0 +1,104 @@
+---
+import Base from '../layouts/Base.astro';
+import Photo from '../components/Photo.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import InquireCTA from '../components/InquireCTA.astro';
+import { featuredProjects, projects } from '../data/projects';
+import { site } from '../data/site';
+import { url } from '../lib/url';
+
+const hero = projects[0];
+
+const approach = [
+  { title: 'Build', text: 'Architecture, layout and how you really live — the tailoring everything else hangs on.' },
+  { title: 'Layer', text: 'Texture, pattern, scale and form, mixed with the confidence of a well-edited closet.' },
+  { title: 'Contrast', text: 'Traditional against modern, accents of color against calm — so every room has a point of view.' },
+  { title: 'Accessorize', text: 'Art, objects and finishing touches, installed and styled for a turnkey reveal day.' },
+];
+---
+<Base>
+  <!-- Hero: photo carries no text; the caption sits beneath it on solid ground -->
+  <section class="container-site">
+    <Photo photo={hero.cover} class="h-[56vh] min-h-[420px] md:h-[760px]" eager />
+    <a
+      href={url(`/projects/${hero.slug}/`)}
+      class="flex flex-wrap items-baseline justify-between gap-3 border-b border-base-300 py-5 hover:text-primary"
+    >
+      <span class="caps text-[13px] tracking-[0.26em]">{hero.title}</span>
+      <span class="font-display text-lg italic">{hero.location}</span>
+    </a>
+  </section>
+
+  <!-- Studio -->
+  <section id="studio" aria-labelledby="studio-heading" class="container-site flex flex-wrap items-start gap-16 pt-28 pb-24 md:pt-36 md:pb-32">
+    <h1 id="studio-heading" class="min-w-0 flex-[1_1_520px] font-display text-[clamp(40px,5vw,72px)] leading-[1.05] tracking-[-0.01em]">
+      Homes, dressed for the way you live.
+    </h1>
+    <div class="flex min-w-0 flex-[1_1_420px] flex-col gap-5 pt-2 text-lg leading-[1.7]">
+      <p>
+        After fifteen years in luxury fashion with Prada, Ralph Lauren, Barneys New York and Coach, Valerie Grant designs
+        a home the way one builds a wardrobe: a strong foundation, layered texture and pattern, considered contrast, and
+        the accessories that make it yours.
+      </p>
+      <p>
+        Traditional and modern, refined and genuinely livable — rooms made to stand up to children, pets and a full
+        table, across New Jersey, New York City, the Hudson Valley and the Hamptons.
+      </p>
+      <!-- TODO: point at a dedicated Studio page once written -->
+      <a href={url('/#studio')} class="text-link mt-2 self-start">Meet Valerie</a>
+    </div>
+  </section>
+
+  <!-- Selected work -->
+  <section id="work" aria-labelledby="work-heading" class="container-site pb-28 md:pb-36">
+    <div class="mb-12 flex flex-wrap items-baseline justify-between gap-4 border-t border-base-300 pt-7">
+      <h2 id="work-heading" class="font-display text-[44px]">Selected Work</h2>
+      <a href={url('/projects/')} class="caps hover:text-primary">All {projects.length} projects</a>
+    </div>
+    <div class="grid gap-x-10 gap-y-14 md:grid-cols-2">
+      {featuredProjects.map((p, i) => <ProjectCard project={p} offset={i % 2 === 1} />)}
+    </div>
+  </section>
+
+  <!-- Approach -->
+  <section aria-labelledby="approach-heading" class="bg-neutral text-neutral-content">
+    <div class="container-site py-28 md:py-32">
+      <h2 id="approach-heading" class="mb-16 max-w-[760px] font-display text-[clamp(32px,3.6vw,52px)] leading-[1.12] md:mb-20">
+        Designed the way a great look comes together.
+      </h2>
+      <ul class="grid gap-12 sm:grid-cols-2 lg:grid-cols-4">
+        {approach.map((step) => (
+          <li class="flex flex-col gap-3.5 border-t border-[#4A4540] pt-6">
+            <h3 class="text-[15px] font-normal uppercase tracking-[0.24em]">{step.title}</h3>
+            <p class="leading-[1.7] text-muted-dark">{step.text}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- Reviews -->
+  <section id="reviews" aria-label="Client review" class="mx-auto flex max-w-[1100px] flex-col items-center gap-8 px-5 py-32 text-center md:px-10 md:py-40">
+    <span aria-hidden="true" class="font-display text-7xl leading-[0.5] text-primary">“</span>
+    <figure class="flex flex-col items-center gap-8">
+      <blockquote class="font-display text-[clamp(28px,3.4vw,46px)] leading-[1.25]">
+        If Valerie is available, consider it a home run.
+      </blockquote>
+      <figcaption class="caps">JC — Spring Lake, New Jersey</figcaption>
+    </figure>
+    <!-- TODO: link to a Reviews page -->
+    <a href={url('/projects/spring-lake-redefined/')} class="text-link">Read client stories</a>
+  </section>
+
+  <!-- Press -->
+  <section id="press" aria-labelledby="press-heading" class="border-y border-base-300">
+    <div class="container-site flex flex-wrap items-center justify-center gap-x-14 gap-y-7 py-14 font-display text-[22px] text-[#4A443D]">
+      <h2 id="press-heading" class="caps basis-full text-center font-sans text-[11px] tracking-[0.32em] text-muted">As featured in</h2>
+      <ul class="contents">
+        {site.press.map((name, i) => <li class:list={[i % 2 === 1 && 'italic']}>{name}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <InquireCTA />
+</Base>

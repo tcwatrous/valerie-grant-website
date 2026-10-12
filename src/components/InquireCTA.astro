@@ -1,0 +1,20 @@
+---
+import Photo from './Photo.astro';
+import { site } from '../data/site';
+---
+<section id="inquire" aria-labelledby="inquire-heading" class="container-site flex flex-wrap items-center gap-16 py-24 md:py-36">
+  <div class="min-w-0 flex-[1_1_460px]">
+    <Photo photo={{ alt: '[Alt text: Valerie in a finished room]', tone: '#B7A99A' }} ratio="5 / 4" />
+  </div>
+  <div class="flex min-w-0 flex-[1_1_420px] flex-col gap-6">
+    <h2 id="inquire-heading" class="font-display text-[clamp(36px,4vw,56px)] leading-[1.08]">
+      Begin the place you’ll love to live.
+    </h2>
+    <p class="text-lg leading-relaxed">
+      Full-service design for new construction, renovation and furnishing — primary residences, weekend homes and
+      pieds-à-terre. Tell us about your home and timeline.
+    </p>
+    <!-- TODO: swap for a form service (e.g. Formspree) or the studio's real address -->
+    <a href={`mailto:${site.email}`} class="btn btn-primary caps self-start px-8 h-14">Start an inquiry</a>
+  </div>
+</section>

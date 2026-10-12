@@ -1,0 +1,15 @@
+---
+import Base from '../../layouts/Base.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import InquireCTA from '../../components/InquireCTA.astro';
+import { projects } from '../../data/projects';
+---
+<Base title="Work" current="Work" description="Selected residential interiors by Valerie Grant Interiors across New Jersey, New York City, the Hudson Valley, the Hamptons and Nantucket.">
+  <section class="container-site pt-16 pb-28 md:pt-20">
+    <h1 class="mb-14 font-display text-[clamp(44px,6vw,88px)] leading-none">Work</h1>
+    <div class="grid gap-x-10 gap-y-14 md:grid-cols-2 xl:grid-cols-3">
+      {projects.map((p) => <ProjectCard project={p} level="h2" />)}
+    </div>
+  </section>
+  <InquireCTA />
+</Base>

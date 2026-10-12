@@ -1,0 +1,30 @@
+---
+import { site } from '../data/site';
+import { url } from '../lib/url';
+const year = new Date().getFullYear();
+---
+<footer class="bg-base-200">
+  <div class="container-site flex flex-wrap justify-between gap-10 pt-16 pb-10">
+    <div class="flex flex-col gap-1 leading-none">
+      <span class="font-display text-[22px] tracking-[0.22em]">VALERIE GRANT</span>
+      <span class="text-[10px] tracking-[0.5em]">INTERIORS</span>
+      <p class="mt-5 text-sm leading-relaxed text-[#4A443D]">{site.regions.join(' · ')}</p>
+    </div>
+    <div class="flex flex-wrap gap-16 text-sm leading-loose">
+      <div class="flex flex-col">
+        <h2 class="caps text-[11px] text-muted">Contact</h2>
+        <a href={url('/#inquire')} class="hover:text-primary">{site.email}</a>
+        <a href={url('/#inquire')} class="hover:text-primary">{site.phone}</a>
+      </div>
+      <div class="flex flex-col">
+        <h2 class="caps text-[11px] text-muted">Follow</h2>
+        {site.social.map((s) => (
+          <a href={s.href} class="hover:text-primary" rel="noopener">{s.label}</a>
+        ))}
+      </div>
+    </div>
+  </div>
+  <div class="container-site pb-8 text-xs tracking-[0.12em] text-muted">
+    © {year} {site.name} · <a href={url('/privacy/')} class="hover:text-primary underline-offset-4 hover:underline">Privacy</a>
+  </div>
+</footer>

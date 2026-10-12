@@ -1,0 +1,48 @@
+---
+import { url } from '../lib/url';
+import { nav } from '../data/site';
+
+interface Props {
+  current?: string;
+}
+const { current } = Astro.props;
+---
+<header class="container-site navbar min-h-0 justify-between gap-5 py-7 px-5 md:px-10">
+  <a href={url('/')} class="flex flex-col gap-0.5 leading-none" aria-label="Valerie Grant Interiors, home">
+    <span class="font-display text-[22px] tracking-[0.22em] md:text-[26px]">VALERIE GRANT</span>
+    <span class="pl-0.5 text-[10px] tracking-[0.5em]">INTERIORS</span>
+  </a>
+
+  <!-- desktop -->
+  <nav aria-label="Primary" class="hidden md:block">
+    <ul class="flex gap-9">
+      {nav.map((item) => (
+        <li>
+          <a
+            href={url(item.href)}
+            class:list={['caps hover:text-primary', (item.label === 'Inquire' || item.label === current) && 'text-primary']}
+            aria-current={item.label === current ? 'page' : undefined}
+          >
+            {item.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </nav>
+
+  <!-- mobile: native <details> so it works without JavaScript and with a keyboard -->
+  <details class="dropdown dropdown-end md:hidden">
+    <summary class="btn btn-ghost caps min-h-11 px-3">Menu</summary>
+    <nav aria-label="Primary" class="dropdown-content z-10 mt-3 w-56 border border-base-300 bg-base-100 p-2">
+      <ul class="menu w-full">
+        {nav.map((item) => (
+          <li>
+            <a href={url(item.href)} class="caps py-3" aria-current={item.label === current ? 'page' : undefined}>
+              {item.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  </details>
+</header>

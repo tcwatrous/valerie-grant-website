@@ -1,0 +1,14 @@
+---
+import Base from '../layouts/Base.astro';
+import { url } from '../lib/url';
+---
+<Base title="Page not found">
+  <section class="container-site flex flex-col items-start gap-8 py-36">
+    <h1 class="font-display text-[clamp(40px,5vw,72px)] leading-none">This room doesn’t exist.</h1>
+    <p class="text-lg">The page may have moved in the redesign.</p>
+    <div class="flex flex-wrap gap-8">
+      <a href={url('/')} class="text-link">Home</a>
+      <a href={url('/projects/')} class="text-link">See the work</a>
+    </div>
+  </section>
+</Base>
