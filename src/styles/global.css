@@ -56,6 +56,9 @@
   body {
     @apply bg-base-100 text-base-content font-sans font-light antialiased;
   }
+  h1, h2, h3, .font-display {
+    font-variation-settings: "opsz" 14;
+  }
   a:focus-visible,
   button:focus-visible,
   summary:focus-visible,
